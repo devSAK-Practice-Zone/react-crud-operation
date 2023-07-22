@@ -22,49 +22,49 @@ const Read = () => {
         getData();
       });
   }
-  
+
   return (
     <>
       <h2>Read Operation</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        {data.map((eachData) => {
-          return (
-            <>
-              <tbody>
-                <tr>
-                  <th scope="row">{ eachData.id }</th>
-                  <td>{ eachData.name }</td>
-                  <td>{ eachData.email }</td>
-                  <td>
-                    <button
-                      type="button"
-                      className="btn btn-success">
-                      Edit
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => handleDelete(eachData.id)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </>
-          );
-        })}
-      </table>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            {data.map((eachData) => {
+              return (
+                <>
+                  <tbody>
+                    <tr>
+                      <th scope="row">{eachData.id}</th>
+                      <td>{eachData.name}</td>
+                      <td>{eachData.email}</td>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-success">
+                          Edit
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-danger fill"
+                          onClick={() => handleDelete(eachData.id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </>
+              );
+            })}
+          </table>
     </>
   );
 };
