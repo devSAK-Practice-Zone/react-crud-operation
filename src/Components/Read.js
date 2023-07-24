@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 const Read = () => {
   const [data, setData] = useState([]);
@@ -11,6 +12,7 @@ const Read = () => {
         setData(res.data);
       });
   }
+
   useEffect(() => {
     getData();
   }, []);
@@ -21,8 +23,14 @@ const Read = () => {
       .then(() => {
         getData();
       });
-  }
-  
+  };
+
+  const handleToLocalStorage = (id, name, email) => {
+    localStorage.setItem("id", id);
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+  };
+
   return (
     <>
       <h2>Read Operation</h2>
@@ -41,20 +49,23 @@ const Read = () => {
             <>
               <tbody>
                 <tr>
-                  <th scope="row">{ eachData.id }</th>
-                  <td>{ eachData.name }</td>
-                  <td>{ eachData.email }</td>
+                  <th scope="row">{eachData.id}</th>
+                  <td>{eachData.name}</td>
+                  <td>{eachData.email}</td>
                   <td>
-                    <button
-                      type="button"
-                      className="btn btn-success">
-                      Edit
-                    </button>
+                    <Link to="/update">
+                      <button
+                        type="button"
+                        className="btn btn-success"
+                        onClick={() => handleToLocalStorage(eachData.id,eachData.name,eachData.email)}>
+                        Edit
+                      </button>
+                    </Link>
                   </td>
                   <td>
                     <button
                       type="button"
-                      className="btn btn-danger"
+                      className="btn btn-danger fill"
                       onClick={() => handleDelete(eachData.id)}>
                       Delete
                     </button>
