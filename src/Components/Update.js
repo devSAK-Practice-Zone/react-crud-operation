@@ -1,6 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Update = () => {
+  const [id, setId] = useState(0);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const history = useNavigate();
+
+  const handleUpdate =(e) => {
+    e.preventDefault();
+    axios
+      .put(`https://642d2881bf8cbecdb4feac9c.mockapi.io/demoData/${id}`, {
+        name: name,
+        email: email,
+      }).then(() => {
+        history("/read");
+      })
+  };
+
+  useEffect(() => {
+    setId(localStorage.getItem("id"));
+    setName(localStorage.getItem("name"));
+    setEmail(localStorage.getItem("email"));
+  }, [])
+  
+
   return (
     <>
     <h2>Update</h2>
@@ -10,7 +36,8 @@ const Update = () => {
           <input
             type="text"
             className="form-control"
-            // onChange={(e) => setName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -18,14 +45,14 @@ const Update = () => {
           <input
             type="email"
             className="form-control"
-            aria-describedby="emailHelp"
-            // onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <button
           type="submit"
           className="btn btn-primary"
-        //   onClick={handleSubmit} 
+          onClick={handleUpdate} 
         >
           Update
         </button>
