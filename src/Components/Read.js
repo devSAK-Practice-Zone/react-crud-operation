@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import {IconButton, Button} from "@mui/material";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import EditIcon from "@mui/icons-material/Edit";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const Read = () => {
   const [data, setData] = useState([]);
@@ -23,7 +27,7 @@ const Read = () => {
       .then(() => {
         getData();
       });
-  };
+  }
 
   const handleToLocalStorage = (id, name, email) => {
     localStorage.setItem("id", id);
@@ -33,49 +37,62 @@ const Read = () => {
 
   return (
     <>
-      <h2>Read Operation</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        {data.map((eachData) => {
-          return (
-            <>
-              <tbody>
-                <tr>
-                  <th scope="row">{eachData.id}</th>
-                  <td>{eachData.name}</td>
-                  <td>{eachData.email}</td>
-                  <td>
-                    <Link to="/update">
-                      <button
-                        type="button"
-                        className="btn btn-success"
-                        onClick={() => handleToLocalStorage(eachData.id,eachData.name,eachData.email)}>
-                        Edit
-                      </button>
-                    </Link>
-                  </td>
-                  <td>
-                    <button
-                      type="button"
-                      className="btn btn-danger fill"
-                      onClick={() => handleDelete(eachData.id)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </>
-          );
-        })}
-      </table>
+      <div className="col-6 container">
+        <div className="d-flex justify-content-between">
+          <h2>Read Operation</h2>
+          <Link to="/create">
+            <Button variant="contained"><AddCircleOutlineIcon fontSize="small" /> New</Button>
+          </Link>
+        </div>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          {data.map((eachData) => {
+            return (
+              <>
+                <tbody>
+                  <tr>
+                    <th scope="row">{eachData.id}</th>
+                    <td>{eachData.name}</td>
+                    <td>{eachData.email}</td>
+                    <td>
+                      <Link to="/update">
+                        <IconButton
+                          aria-label="edit"
+                          color="success"
+                          onClick={() =>
+                            handleToLocalStorage(
+                              eachData.id,
+                              eachData.name,
+                              eachData.email
+                            )
+                          }>
+                          <EditIcon fontSize="inherit" />
+                        </IconButton>
+                      </Link>
+                    </td>
+                    <td>
+                      <IconButton
+                        aria-label="delete"
+                        color="error"
+                        onClick={() => handleDelete(eachData.id)}>
+                        <DeleteOutlinedIcon fontSize="inherit" />
+                      </IconButton>
+                    </td>
+                  </tr>
+                </tbody>
+              </>
+            );
+          })}
+        </table>
+      </div>
     </>
   );
 };
