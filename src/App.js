@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Create from "./Components/Create";
 import Read from "./Components/Read";
 import Update from "./Components/Update";
+import ReactFlow from "./Components/ReactFlow";
+import Home from "./Components/Home";
 
 const darkTheme = createTheme({
   palette: {
@@ -21,7 +23,7 @@ function App() {
         <div className="col-12 pb-2">
           <AppHeader></AppHeader>
         </div>
-        <div className="col-6 container">
+        <div className="col-12 container">
           <div className="card">
             <div className="card-body">
               <BrowserRouter>
@@ -29,6 +31,10 @@ function App() {
                   <Route
                     exact
                     path="/"
+                    element={<Home />}></Route>
+                  <Route
+                    exact
+                    path="/create"
                     element={<Create />}></Route>
                   <Route
                     exact
@@ -38,6 +44,10 @@ function App() {
                     exact
                     path="/update"
                     element={<Update />}></Route>
+                  <Route
+                    exact
+                    path="/reactflow"
+                    element={<ReactFlow />}></Route>
                 </Routes>
               </BrowserRouter>
             </div>

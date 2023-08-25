@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Box,
   AppBar,
@@ -6,10 +6,10 @@ import {
   IconButton,
   Typography,
   Button,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
-const AppHeader = () => {
+const AppHeader = (props) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -26,9 +26,20 @@ const AppHeader = () => {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1 }}>
-            CRUD Operation
+            React Operation
           </Typography>
-          <Button color="inherit">Login</Button>
+          {props.user === null ? (
+            <Button color="inherit" onClick={props.onSignIn}>Login</Button>
+          ) : (
+            <div>
+              {/* @{props.user.username}{" "} */}
+              <Button
+                onClick={props.onSignOut}>
+                Logout
+              </Button>
+            </div>
+          )}
+          {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
       </AppBar>
     </Box>
